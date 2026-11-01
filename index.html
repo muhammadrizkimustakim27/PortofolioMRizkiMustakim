@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Rizki Mustakim, S.E. | Portofolio Manajemen Keuangan Syariah</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#1e3a8a',
+                            softblue: '#2563eb',
+                            green: '#059669',
+                            softgreen: '#10b981',
+                            teal: '#0d9488',
+                            lightbg: '#f8fafc',
+                            darkbg: '#0f172a',
+                            darkcard: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .hero-bg {
+            background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.9)), 
+                              url('https://lh3.googleusercontent.com/d/1Z9fNU1Ai7DNpG-gltHov5l7j7uknsQuu');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* Custom Financial Gold Coin Cursor & Sparkles */
+        .cursor-finance {
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s linear;
+        }
+        .cursor-sparkle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            border-radius: 50%;
+            animation: blingFade 0.7s forwards ease-out;
+        }
+        @keyframes blingFade {
+            0% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+                filter: drop-shadow(0 0 8px #fbbf24);
+            }
+            100% {
+                transform: translate(-50%, -30px) scale(0.2) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        .bg-text-portfolio {
+            font-size: clamp(3.5rem, 12vw, 10rem);
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.01) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Typewriter Cursor Blink Animation */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: #10b981;
+            animation: blink 0.8s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Scroll Reveal Animation Styles */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-element.reveal-from-top {
+            transform: translateY(-30px);
+        }
+        .reveal-element.reveal-from-left {
+            transform: translateX(-40px);
+        }
+        .reveal-element.reveal-from-right {
+            transform: translateX(40px);
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased selection:bg-emerald-500 selection:text-white overflow-x-hidden">
+
+    <!-- Custom Animated Financial Cursor Elements -->
+    <div id="cursor-finance" class="cursor-finance hidden md:flex items-center justify-center text-amber-400 text-xl drop-shadow-[0_0_12px_rgba(251,191,36,0.9)]">
+        <i class="fa-solid fa-coins animate-bounce"></i>
+    </div>
+    <div id="sparkle-container"></div>
+
+    <!-- PAGE 0: SPLASH SCREEN / COVER INTRO PAGE -->
+    <div id="intro-screen" class="fixed inset-0 z-[200] bg-slate-950 flex flex-col items-center justify-center p-4 overflow-hidden transition-all duration-700">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+            <span class="bg-text-portfolio font-black uppercase text-center">PORTFOLIO</span>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center text-center max-w-xl mx-auto space-y-6">
+            <!-- Avatar Frame -->
+            <div class="relative animate-float">
+                <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-emerald-400 shadow-2xl shadow-emerald-500/30">
+                    <img src="https://lh3.googleusercontent.com/d/1qK7YqpDPevcrvGVqTm84YtHizK30K2C1" 
+                         alt="Muhammad Rizki Mustakim" 
+                         class="w-full h-full object-cover"
+                         onerror="this.src='https://placehold.co/300x300/0f172a/10b981?text=M.+Rizki+Mustakim'">
+                </div>
+                <div class="absolute -bottom-2 -right-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-2.5 rounded-full shadow-lg">
+                    <i class="fa-solid fa-graduation-cap text-lg"></i>
+                </div>
+            </div>
+
+            <div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Muhammad Rizki Mustakim, <span class="text-emerald-400 font-serif italic">S.E.</span>
+                </h1>
+                <p class="text-xs sm:text-sm text-emerald-300 font-medium tracking-wide uppercase mt-2">
+                    Manajemen Keuangan Syariah • UIN Syekh Ali Hasan Ahmad Addary
+                </p>
+            </div>
+
+            <p class="text-slate-300 text-sm italic font-light border-x border-emerald-500/40 px-4">
+                "Turning Numbers into Insights, Insights into Decisions"
+            </p>
+
+            <button onclick="enterPortfolio()" class="mt-4 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-600 hover:from-emerald-600 hover:to-blue-700 text-white font-bold text-sm shadow-xl shadow-emerald-900/40 transition transform hover:scale-105 flex items-center gap-3">
+                <span>Masuk ke Portofolio</span>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Background Music Audio Tag (High Quality Slow Instrumental Piano) -->
+    <audio id="bg-music" loop preload="auto" crossorigin="anonymous">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-relaxing-in-nature-522.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 text-lg sm:text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-emerald-600 to-blue-600 text-white flex items-center justify-center font-extrabold text-sm shadow-md">MR</span>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-teal-600 to-emerald-600 dark:from-blue-400 dark:to-emerald-400">
+                    M. Rizki Mustakim, S.E.
+                </span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-300">
+                <a href="#about" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Tentang</a>
+                <a href="#experience" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Pengalaman</a>
+                <a href="#projects" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Karya Saya</a>
+                <a href="#certificates" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Sertifikat</a>
+                <a href="#community" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Komunitas</a>
+                <a href="#market" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Pasar Modal</a>
+                <a href="#contact" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">Kontak</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button id="music-btn" onclick="toggleMusic()" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-emerald-100 hover:text-emerald-600 dark:hover:bg-slate-700 transition flex items-center justify-center relative" title="Putar/Hentikan Musik">
+                    <i id="music-icon" class="fa-solid fa-music text-sm"></i>
+                    <span id="music-indicator" class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+                </button>
+
+                <button id="theme-toggle" onclick="toggleTheme()" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-blue-100 hover:text-blue-600 dark:hover:bg-slate-700 transition" title="Ganti Mode Terang/Gelap">
+                    <i id="theme-icon" class="fa-solid fa-moon text-sm"></i>
+                </button>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-2 pb-4 space-y-2">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600">Tentang</a>
+            <a href="#experience" onclick="toggleMobileMenu()" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600">Pengalaman</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600">Karya Saya</a>
+            <a href="#certificates" onclick="toggleMobileMenu()" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600">Sertifikat</a>
+            <a href="#community" onclick="toggleMobileMenu()" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600">Komunitas TAKA</a>
+            <a href="#market" onclick="toggleMobileMenu()" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600">Pasar Modal</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-emerald-600">Kontak</a>
+        </div>
+    </header>
+
+    <!-- SECTION 1: HERO SECTION -->
+    <section class="relative min-h-screen hero-bg flex items-center justify-center pt-20 pb-12 px-4 sm:px-6 lg:px-8 text-white overflow-hidden">
+        <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center z-10">
+            <div class="lg:col-span-7 text-center lg:text-left space-y-6 reveal-element reveal-from-left">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card text-emerald-300 text-xs sm:text-sm font-semibold tracking-wide border border-emerald-500/30">
+                    <i class="fa-solid fa-award"></i> S1 Manajemen Keuangan Syariah • IPK 3.74 (Pujian)
+                </div>
+                
+                <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                    Muhammad Rizki Mustakim, <span class="text-emerald-400 font-serif italic">S.E.</span>
+                </h1>
+
+                <!-- ANIMATED TYPING TEXT COMPONENT -->
+                <div class="h-10 flex items-center justify-center lg:justify-start">
+                    <span class="text-lg sm:text-2xl font-bold text-emerald-300">Spesialisasi: </span>
+                    <span id="typing-text" class="text-lg sm:text-2xl font-bold text-teal-300 ml-2"></span>
+                    <span class="typing-cursor ml-1 text-lg sm:text-2xl">&nbsp;</span>
+                </div>
+
+                <p class="text-xl sm:text-2xl font-light text-slate-200 italic border-l-4 border-emerald-500 pl-4 my-2">
+                    "Turning Numbers into Insights, Insights into Decisions"
+                </p>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl text-justify">
+                    Saya merupakan Sarjana Ekonomi lulusan program studi Manajemen Keuangan Syariah di UIN Syekh Ali Hasan Ahmad Addary Padangsidimpuan. Berhasil menyelesaikan pendidikan akademis secara efisien dan tepat waktu dalam kurun waktu <strong>3 tahun 8 bulan</strong> dengan meraih predikat <strong>Pujian (Cumlaude)</strong> serta <strong>IPK 3.74</strong>. Memiliki ketertarikan tinggi pada analisis laporan keuangan, operasional perbankan syariah, manajemen risiko, kearsipan data, hingga pengembangan literasi pasar modal saham Indonesia.
+                </p>
+
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#contact" class="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-900/40 hover:from-emerald-600 hover:to-teal-700 transition flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> Hubungi Saya
+                    </a>
+                    <a href="#experience" class="px-6 py-3 rounded-xl glass-card hover:bg-white/20 text-white font-semibold transition border border-white/20 flex items-center gap-2">
+                        <i class="fa-solid fa-briefcase"></i> Lihat Portofolio
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 flex justify-center reveal-element reveal-from-right">
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-blue-600 rounded-3xl blur-xl opacity-50 group-hover:opacity-75 transition duration-500"></div>
+                    <div class="relative w-64 h-80 sm:w-72 sm:h-96 rounded-2xl overflow-hidden border-2 border-emerald-400/40 shadow-2xl bg-slate-800">
+                        <img src="https://lh3.googleusercontent.com/d/1qK7YqpDPevcrvGVqTm84YtHizK30K2C1" 
+                             alt="Muhammad Rizki Mustakim, S.E." 
+                             class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-500"
+                             onerror="this.src='https://placehold.co/400x500/0f172a/10b981?text=M.+Rizki+Mustakim'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: PROFIL AKADEMIK & KETERAMPILAN -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16 reveal-element reveal-from-top">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">Profil</h2>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Tentang Saya & Keahlian Keuangan</h3>
+            <div class="w-20 h-1.5 bg-gradient-to-r from-blue-600 to-emerald-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg reveal-element">
+                <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Pendidikan S1</h4>
+                <p class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm mb-4">UIN Syekh Ali Hasan Ahmad Addary Padangsidimpuan</p>
+                <ul class="space-y-3 text-slate-600 dark:text-slate-300 text-sm">
+                    <li class="flex justify-between border-b dark:border-slate-700 pb-2">
+                        <span>Program Studi:</span> <strong class="text-slate-800 dark:text-slate-100">Manajemen Keuangan Syariah</strong>
+                    </li>
+                    <li class="flex justify-between border-b dark:border-slate-700 pb-2">
+                        <span>Masa Studi:</span> <strong class="text-emerald-600 dark:text-emerald-400 font-bold">3 Tahun 8 Bulan (Tepat Waktu)</strong>
+                    </li>
+                    <li class="flex justify-between border-b dark:border-slate-700 pb-2">
+                        <span>IPK / Predikat:</span> <strong class="text-emerald-600 dark:text-emerald-400 font-bold">3.74 (Pujian / Cumlaude)</strong>
+                    </li>
+                    <li class="pt-2">
+                        <strong class="block text-slate-800 dark:text-slate-200 mb-1">Judul Skripsi:</strong>
+                        <p class="italic text-slate-500 dark:text-slate-400 text-xs mb-3">"Pengaruh Fundamental Perusahaan terhadap Dividend Payout Ratio di Sektor Properti dan Real Estate"</p>
+                        <a href="https://drive.google.com/file/d/1T3O7vq1efXwuBaCKpTwbpjkZgKeC2sgV/view?usp=drive_link" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl text-xs font-semibold shadow-md hover:from-emerald-700 hover:to-teal-700 transition">
+                            <i class="fa-solid fa-file-pdf"></i> Download / Baca Skripsi
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg reveal-element">
+                <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Kompetensi Utama</h4>
+                <p class="text-blue-600 dark:text-blue-400 font-semibold text-sm mb-4">Kemampuan Analitis & Operasional</p>
+                <div class="space-y-3 text-sm">
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Analisis Laporan Keuangan</span><span class="font-bold text-emerald-600">95%</span></div>
+                        <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full"><div class="bg-emerald-500 h-2 rounded-full" style="width: 95%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Operasional & Sales Perbankan</span><span class="font-bold text-emerald-600">90%</span></div>
+                        <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full"><div class="bg-emerald-500 h-2 rounded-full" style="width: 90%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Pengarsipan & Administrasi Data</span><span class="font-bold text-teal-600">98%</span></div>
+                        <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full"><div class="bg-teal-500 h-2 rounded-full" style="width: 98%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Desain & Visualisasi Konten</span><span class="font-bold text-cyan-600">88%</span></div>
+                        <div class="w-full bg-slate-200 dark:bg-slate-700 h-2 rounded-full"><div class="bg-cyan-500 h-2 rounded-full" style="width: 88%"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 border border-slate-200 dark:border-slate-700 shadow-lg reveal-element">
+                <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900/40 text-teal-600 dark:text-teal-400 flex items-center justify-center text-xl mb-6">
+                    <i class="fa-solid fa-laptop-code"></i>
+                </div>
+                <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Perangkat Lunak</h4>
+                <p class="text-teal-600 dark:text-teal-400 font-semibold text-sm mb-4">Penguasaan Tools Keuangan & Desain</p>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div class="p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-600/40">
+                        <i class="fa-solid fa-file-excel text-emerald-600 text-base"></i>
+                        <span class="text-xs font-semibold">MS Excel</span>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-600/40">
+                        <i class="fa-solid fa-file-word text-blue-600 text-base"></i>
+                        <span class="text-xs font-semibold">MS Word</span>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-600/40">
+                        <i class="fa-solid fa-file-powerpoint text-orange-500 text-base"></i>
+                        <span class="text-xs font-semibold">MS PowerPoint</span>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-600/40">
+                        <i class="fa-solid fa-palette text-sky-500 text-base"></i>
+                        <span class="text-xs font-semibold">Canva Pro</span>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-600/40">
+                        <i class="fa-solid fa-chart-line text-purple-500 text-base"></i>
+                        <span class="text-xs font-semibold">TradingView</span>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-600/40">
+                        <i class="fa-solid fa-video text-rose-500 text-base"></i>
+                        <span class="text-xs font-semibold">CapCut</span>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 dark:bg-slate-700/50 rounded-xl flex items-center gap-2 border border-slate-200/50 dark:border-slate-600/40 col-span-2">
+                        <i class="fa-solid fa-cloud text-teal-600 text-base"></i>
+                        <span class="text-xs font-semibold">Google Workspace</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PENGALAMAN MAGANG -->
+    <section id="experience" class="py-20 bg-slate-100 dark:bg-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element reveal-from-top">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">Pengalaman Kerja Lapangan</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Bank Muamalat KC Padangsidimpuan</h3>
+                <p class="text-emerald-600 dark:text-emerald-400 font-semibold mt-1 text-sm">Divisi Sales dan Operasional Perbankan Syariah (Februari 2026)</p>
+                <div class="w-20 h-1.5 bg-gradient-to-r from-blue-600 to-emerald-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- Detail Keterangan Tugas Magang -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 mb-10 shadow-lg border border-slate-200 dark:border-slate-700 reveal-element">
+                <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-briefcase text-emerald-500"></i> Rincian Tanggung Jawab & Performance:
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                    <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl border-l-4 border-emerald-500">
+                        <strong class="block text-slate-900 dark:text-white mb-1">Pengarsipan & Dokumen</strong>
+                        <p class="text-slate-600 dark:text-slate-300 text-xs">Membantu pengelolaan, pemeriksaan, dan pengarsipan dokumen administrasi nasabah secara terstruktur dan tertib.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl border-l-4 border-blue-500">
+                        <strong class="block text-slate-900 dark:text-white mb-1">Rekapitulasi Data Excel</strong>
+                        <p class="text-slate-600 dark:text-slate-300 text-xs">Melakukan pencatatan dan rekapitulasi data administrasi perbankan harian menggunakan Microsoft Excel secara akurat.</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 dark:bg-slate-700/40 rounded-xl border-l-4 border-teal-500">
+                        <strong class="block text-slate-900 dark:text-white mb-1">Pemasaran & Layanan Sales</strong>
+                        <p class="text-slate-600 dark:text-slate-300 text-xs">Membantu kegiatan pemasaran produk dan layanan perbankan syariah serta memberikan informasi transparan kepada calon nasabah.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 cursor-pointer reveal-element reveal-from-left" onclick="openLightbox('https://lh3.googleusercontent.com/d/1HibMmiEklIEq517alR792nwNaI0pcM7j')">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1HibMmiEklIEq517alR792nwNaI0pcM7j" alt="Magang 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/600x400/0f172a/10b981?text=Magang+Bank+Muamalat+1'">
+                        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-white/80 text-slate-900 shadow-lg"><i class="fa-solid fa-magnifying-glass-plus text-xl"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 cursor-pointer reveal-element reveal-from-right" onclick="openLightbox('https://lh3.googleusercontent.com/d/1bMs0mmE0JudQww71RCEDWeeoA1n2NJV-')">
+                    <div class="h-80 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1bMs0mmE0JudQww71RCEDWeeoA1n2NJV-" alt="Magang 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/600x400/0f172a/10b981?text=Magang+Bank+Muamalat+2'">
+                        <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-white/80 text-slate-900 shadow-lg"><i class="fa-solid fa-magnifying-glass-plus text-xl"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: ORGANISASI -->
+    <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16 reveal-element reveal-from-top">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">Kepemimpinan</h2>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Pengalaman Organisasi</h3>
+            <div class="w-20 h-1.5 bg-gradient-to-r from-blue-600 to-emerald-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between reveal-element">
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 bg-emerald-100 dark:bg-emerald-900/40 px-3 py-1 rounded-full">2025 - 2026</span>
+                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-3">Sekretaris Umum</h4>
+                    <p class="text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-3">Himpunan Mahasiswa - UIN SYAHADA</p>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                        <li>Mengelola administrasi, kearsipan, dan surat-menyurat organisasi.</li>
+                        <li>Menyusun dokumen resmi & notulen rapat serta kerapian arsip digital.</li>
+                        <li>Berkoordinasi dengan pengurus organisasi & dosen pembina.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-slate-200 dark:border-slate-700 border-l-4 border-l-emerald-500 flex flex-col justify-between reveal-element">
+                <div>
+                    <span class="text-xs font-bold text-emerald-600 bg-emerald-100 dark:bg-emerald-900/40 px-3 py-1 rounded-full">2025 - 2030</span>
+                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-3">Ketua Ranting</h4>
+                    <p class="text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-3">GM PUJAKESUMA Kota Padangsidimpuan</p>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                        <li>Memimpin dan mengkoordinasikan kegiatan kepemudaan Pujakesuma.</li>
+                        <li>Menyusun alur program kerja sosial & pemberdayaan masyarakat.</li>
+                        <li>Membangun konsolidasi antar anggota ranting di wilayah Padangsidimpuan.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-md border border-slate-200 dark:border-slate-700 flex flex-col justify-between reveal-element">
+                <div>
+                    <span class="text-xs font-bold text-blue-600 bg-blue-100 dark:bg-blue-900/40 px-3 py-1 rounded-full">Juni 2024</span>
+                    <h4 class="text-xl font-bold text-slate-900 dark:text-white mt-3">Ketua Panitia Seminar</h4>
+                    <p class="text-blue-600 dark:text-blue-400 text-xs font-semibold mb-3">UIN SYAHADA Padangsidimpuan</p>
+                    <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-1.5 list-disc list-inside">
+                        <li>Mengatur pembagian tugas & koordinasi tim dari persiapan hingga pelaksanaan.</li>
+                        <li>Menyusun timeline dan membantu pengelolaan anggaran operasional.</li>
+                        <li>Memastikan kelancaran administrasi & fasilitas seminar.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Galeri Foto Organisasi -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 group cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1EmPnNGDTn7IVrxga4x49QwVKOhfWzcJ3')">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://lh3.googleusercontent.com/d/1EmPnNGDTn7IVrxga4x49QwVKOhfWzcJ3" alt="Organisasi 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Organisasi+1'">
+                </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 group cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1Vk0QHnx_2YGk2Rdx0HebhWHDsEfQ95UK')">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://lh3.googleusercontent.com/d/1Vk0QHnx_2YGk2Rdx0HebhWHDsEfQ95UK" alt="Organisasi 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Organisasi+2'">
+                </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 group cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1uJpoG9szWiYKJ1uBc8vRvGemkoL9jLVw')">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://lh3.googleusercontent.com/d/1uJpoG9szWiYKJ1uBc8vRvGemkoL9jLVw" alt="Organisasi 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Organisasi+3'">
+                </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 group cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/15uJ_0FKIJgAYTn8mGoCQP38YQu_cNKxW')">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://lh3.googleusercontent.com/d/15uJ_0FKIJgAYTn8mGoCQP38YQu_cNKxW" alt="Organisasi 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Organisasi+4'">
+                </div>
+            </div>
+            <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 group cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1Me7971PPig-ZEGMSDZ6NYRGd0FjqJ9ed')">
+                <div class="h-56 overflow-hidden relative">
+                    <img src="https://lh3.googleusercontent.com/d/1Me7971PPig-ZEGMSDZ6NYRGd0FjqJ9ed" alt="Organisasi 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-300" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Organisasi+5'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: KARYA SAYA -->
+    <section id="projects" class="py-20 bg-slate-100 dark:bg-slate-800/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element reveal-from-top">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">Showcase & Portfolio Karya</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Karya Analisis & Skill Keuangan</h3>
+                <div class="w-20 h-1.5 bg-gradient-to-r from-blue-600 to-emerald-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 group cursor-pointer reveal-element reveal-from-left" onclick="openLightbox('https://lh3.googleusercontent.com/d/1q6qEyDo8nmvYl7JefCGhll9Bck9AB7qy')">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1q6qEyDo8nmvYl7JefCGhll9Bck9AB7qy" alt="Karya Keuangan 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0f172a/10b981?text=Karya+Keuangan+1'">
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-700 group cursor-pointer reveal-element reveal-from-right" onclick="openLightbox('https://lh3.googleusercontent.com/d/1Mmtmujx_r2iUN-orUJooH-W7Ow2EWyX3')">
+                    <div class="h-72 overflow-hidden relative">
+                        <img src="https://lh3.googleusercontent.com/d/1Mmtmujx_r2iUN-orUJooH-W7Ow2EWyX3" alt="Karya Keuangan 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/600x400/0f172a/10b981?text=Karya+Keuangan+2'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: SERTIFIKAT & CV -->
+    <section id="certificates" class="py-20 bg-slate-100 dark:bg-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element reveal-from-top">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">Lisensi & Sertifikasi</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Galeri Sertifikat, Transkrip & CV</h3>
+                <div class="w-20 h-1.5 bg-gradient-to-r from-blue-600 to-emerald-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <!-- GABUNGAN KARTU TRANSKRIP NILAI & CV SAYA -->
+            <div class="mb-12 bg-gradient-to-r from-slate-900 via-teal-950 to-emerald-950 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-emerald-500/30 reveal-element">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-6 space-y-2">
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider">Berkas Akademik & Karir Resmi</span>
+                        <h4 class="text-2xl font-extrabold text-white">Dokumen Kualifikasi Utama</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Unduh berkas resmi Transkrip Nilai Sarjana (IPK 3.74, Lulus Tepat Waktu 3 Tahun 8 Bulan) dan Curriculum Vitae (CV) terbaru Muhammad Rizki Mustakim, S.E. untuk keperluan rekrutmen.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-6 flex flex-col sm:flex-row gap-4 justify-end">
+                        <a href="https://drive.google.com/file/d/1R4xbp7BLhhcYzCWzKZd68LO1yqFOm0aJ/view?usp=drive_link" target="_blank" class="px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white rounded-2xl font-bold text-xs shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-invoice text-base"></i> Transkrip Nilai (PDF)
+                        </a>
+                        <a href="https://drive.google.com/file/d/1qMh-ePVnG4zBXDFnqQ672dat7ijimb14/view?usp=drive_link" target="_blank" class="px-6 py-3.5 bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white rounded-2xl font-bold text-xs shadow-lg transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-arrow-down text-base"></i> Curriculum Vitae (CV)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/192bOGxxU39Idj-t-795ygZ5z-dX8DlCy')"><img src="https://lh3.googleusercontent.com/d/192bOGxxU39Idj-t-795ygZ5z-dX8DlCy" class="w-full h-64 object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Sertifikat+1'"></div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1KpbsY2YfMN6vVvDD1Gxt1VonHnU5CDoo')"><img src="https://lh3.googleusercontent.com/d/1KpbsY2YfMN6vVvDD1Gxt1VonHnU5CDoo" class="w-full h-64 object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Sertifikat+2'"></div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1up2rxYCzyVQ2h7u6d8ITly6kKYJXnZZf')"><img src="https://lh3.googleusercontent.com/d/1up2rxYCzyVQ2h7u6d8ITly6kKYJXnZZf" class="w-full h-64 object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Sertifikat+3'"></div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1rl6N-mPpe6MmrziZsEhwIwjHxiAkMlkr')"><img src="https://lh3.googleusercontent.com/d/1rl6N-mPpe6MmrziZsEhwIwjHxiAkMlkr" class="w-full h-64 object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Sertifikat+4'"></div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/1Wyy5Pq6OQyg107PNCxcBXhPnYygT4K64')"><img src="https://lh3.googleusercontent.com/d/1Wyy5Pq6OQyg107PNCxcBXhPnYygT4K64" class="w-full h-64 object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Sertifikat+5'"></div>
+                <div class="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md cursor-pointer reveal-element" onclick="openLightbox('https://lh3.googleusercontent.com/d/16gl7cGqpekeKRXyUIv0IwpZ-Mvfmos8h')"><img src="https://lh3.googleusercontent.com/d/16gl7cGqpekeKRXyUIv0IwpZ-Mvfmos8h" class="w-full h-64 object-cover" onerror="this.src='https://placehold.co/400x300/0f172a/10b981?text=Sertifikat+6'"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: KOMUNITAS TAKA FAMILY -->
+    <section id="community" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden reveal-element">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                <div class="lg:col-span-3 flex justify-center">
+                    <div class="w-36 h-36 rounded-full overflow-hidden border-4 border-emerald-400/60 shadow-xl bg-slate-800 flex items-center justify-center">
+                        <img src="https://lh3.googleusercontent.com/d/15xmMbfXM7rnPLvFxlSYSybznS9R5JbQ7" 
+                             alt="Logo Komunitas TAKA FAMILY" 
+                             class="w-full h-full object-cover"
+                             onerror="this.src='https://placehold.co/200x200/0f172a/10b981?text=TAKA+FAMILY'">
+                    </div>
+                </div>
+                <div class="lg:col-span-6 space-y-3 text-center lg:text-left">
+                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider">Founder Komunitas</span>
+                    <h3 class="text-3xl sm:text-4xl font-extrabold">TAKA FAMILY <span class="text-emerald-400 text-xl font-normal">(Trader & Keuangan Saham)</span></h3>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Komunitas diskusi pasar modal syariah yang saya inisiasi untuk literasi saham Indonesia & pengelolaan keuangan mandiri.
+                    </p>
+                </div>
+                <div class="lg:col-span-3 flex justify-center">
+                    <a href="https://chat.whatsapp.com/EGh9Cyx4Vx89l1hf7S14G8?s=cl&p=a&mlu=4&ilr=4&iam=2" target="_blank" class="w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-sm rounded-2xl shadow-xl transition flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Gabung TAKA FAMILY
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: TRADINGVIEW GRAFIK IHSG & REKOMENDASI SAHAM -->
+    <section id="market" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal-element reveal-from-top">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2">Real-Time Financial Analytics</h2>
+            <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">Grafik IHSG & Rekomendasi Saham Perdagangan</h3>
+            <div class="w-20 h-1.5 bg-gradient-to-r from-blue-600 to-emerald-500 mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-7 bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-200 dark:border-slate-700 reveal-element reveal-from-left">
+                <div class="tradingview-widget-container" style="height: 480px; width: 100%;">
+                    <div id="tradingview_ihsg_widget" style="height: 100%; width: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-5 bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-xl border border-slate-200 dark:border-slate-700 reveal-element reveal-from-right">
+                <div class="tradingview-widget-container" style="height: 480px; width: 100%;">
+                    <div id="tradingview_screener_widget" style="height: 100%; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: KONTAK & KOMENTAR PUBLIK -->
+    <section id="contact" class="py-20 bg-slate-900 text-white w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal-element reveal-from-top">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-emerald-400 mb-2">Hubungi Saya</h2>
+                <h3 class="text-3xl sm:text-4xl font-extrabold">Mari Berkolaborasi</h3>
+                <p class="text-slate-300 mt-2 text-sm">JL. MGR MARADAT Gg. SD 4, Kel. Ujung Padang, Kota Padangsidimpuan</p>
+                <div class="w-20 h-1.5 bg-emerald-500 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                <div onclick="openGmailModal()" class="glass-card p-6 rounded-3xl text-center hover:border-emerald-400 transition cursor-pointer reveal-element">
+                    <i class="fa-solid fa-envelope text-3xl text-red-500 mb-2"></i>
+                    <h5 class="text-sm font-bold text-white">muhammadrizkimustakim27@gmail.com</h5>
+                    <p class="text-xs text-slate-400 mt-1">Kirim Gmail Direct</p>
+                </div>
+
+                <a href="https://www.instagram.com/muhammad_rizkii19?cplk=MWZuYXdtbmpucDdsaQ==" target="_blank" class="glass-card p-6 rounded-3xl text-center hover:border-pink-500 transition block reveal-element">
+                    <i class="fa-brands fa-instagram text-3xl text-pink-500 mb-2"></i>
+                    <h5 class="text-sm font-bold text-white">@muhammad_rizkii19</h5>
+                    <p class="text-xs text-slate-400 mt-1">Instagram Profil</p>
+                </a>
+
+                <a href="https://wa.me/6285176856335" target="_blank" class="glass-card p-6 rounded-3xl text-center hover:border-emerald-400 transition block reveal-element">
+                    <i class="fa-brands fa-whatsapp text-3xl text-emerald-500 mb-2"></i>
+                    <h5 class="text-sm font-bold text-white">085176856335</h5>
+                    <p class="text-xs text-slate-400 mt-1">WhatsApp Direct</p>
+                </a>
+            </div>
+
+            <!-- Formulir Komentar Publik -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 max-w-2xl mx-auto reveal-element">
+                <h4 class="text-xl font-bold text-center text-white mb-4">Tinggalkan Komentar / Pesan</h4>
+                <form onsubmit="postComment(event)" class="space-y-4 mb-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <input type="text" id="comment-name" required placeholder="Nama Lengkap *" class="w-full px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm">
+                        <input type="text" id="comment-role" placeholder="Instansi / Jabatan" class="w-full px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm">
+                    </div>
+                    <textarea id="comment-text" rows="3" required placeholder="Isi Pesan / Saran..." class="w-full px-4 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white text-sm"></textarea>
+                    <button type="submit" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl transition">
+                        Kirim Komentar Publik
+                    </button>
+                </form>
+
+                <div class="space-y-3">
+                    <h5 class="text-sm font-bold border-b border-slate-700 pb-2">Komentar Pengunjung (<span id="comments-count">0</span>)</h5>
+                    <div id="comments-list" class="space-y-2 max-h-60 overflow-y-auto pr-1"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-[100] hidden bg-black/90 flex items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightbox-img" src="" alt="Zoom" class="max-w-full max-h-[85vh] object-contain rounded-lg">
+    </div>
+
+    <!-- GMAIL COMPOSER MODAL -->
+    <div id="gmail-modal" class="fixed inset-0 z-[100] hidden bg-black/80 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 text-white relative">
+            <button onclick="closeGmailModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            <h4 class="font-bold text-lg mb-4">Kirim Pesan via Gmail</h4>
+            <div class="space-y-3">
+                <input type="text" id="gmail-subject" placeholder="Subjek Pesan" class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm">
+                <textarea id="gmail-body" rows="4" placeholder="Isi Pesan Email..." class="w-full px-3 py-2 rounded-lg bg-slate-800 border border-slate-700 text-sm"></textarea>
+                <button onclick="sendViaGmailRedirect()" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold text-sm rounded-lg transition">Buka & Kirim Gmail</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-6 text-center text-xs border-t border-slate-800">
+        <p>© 2026 Muhammad Rizki Mustakim, S.E. All rights reserved.</p>
+        <p class="mt-1">Manajemen Keuangan Syariah • UIN Syekh Ali Hasan Ahmad Addary Padangsidimpuan</p>
+    </footer>
+
+    <!-- TradingView Widget Library -->
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+    <!-- Global Application Scripts -->
+    <script>
+        // Intersection Observer for Smooth Scroll Animations (Reveal Effect)
+        function initScrollAnimations() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-element');
+            revealElements.forEach(el => observer.observe(el));
+        }
+
+        // Animated Typing Effect Implementation
+        const typingPhrases = [
+            "Analisis Laporan Keuangan",
+            "Operasional Perbankan Syariah",
+            "Manajemen Risiko & Keuangan",
+            "Founder TAKA FAMILY (Trader & Saham)",
+            "Pengarsipan & Administrasi Data"
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingSpeed = 90;
+        const deletingSpeed = 45;
+        const delayBetweenPhrases = 1800;
+
+        function typeEffect() {
+            const currentPhrase = typingPhrases[phraseIndex];
+            const typingElement = document.getElementById("typing-text");
+
+            if (!typingElement) return;
+
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let nextSpeed = isDeleting ? deletingSpeed : typingSpeed;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                nextSpeed = delayBetweenPhrases;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % typingPhrases.length;
+                nextSpeed = 400;
+            }
+
+            setTimeout(typeEffect, nextSpeed);
+        }
+
+        // Local public comments state array
+        let commentsData = [
+            { name: "Ahmad Farhan, M.E.", role: "Praktisi Perbankan Syariah", text: "Portofolio yang sangat rapi dan lengkap! Sangat merepresentasikan lulusan Manajemen Keuangan Syariah unggulan.", date: "15/10/2026" }
+        ];
+
+        function renderComments() {
+            const list = document.getElementById('comments-list');
+            const count = document.getElementById('comments-count');
+            if (!list || !count) return;
+
+            count.innerText = commentsData.length;
+            list.innerHTML = commentsData.map(c => `
+                <div class="p-3 bg-slate-800/80 rounded-xl border border-slate-700/60">
+                    <div class="flex justify-between items-start">
+                        <h6 class="font-bold text-xs text-emerald-300">${c.name} <span class="text-[10px] text-slate-400 font-normal">• ${c.role}</span></h6>
+                        <span class="text-[10px] text-slate-400">${c.date}</span>
+                    </div>
+                    <p class="text-xs text-slate-200 mt-1">${c.text}</p>
+                </div>
+            `).join('');
+        }
+
+        function postComment(e) {
+            e.preventDefault();
+            const name = document.getElementById('comment-name').value.trim();
+            const role = document.getElementById('comment-role').value.trim() || 'Pengunjung';
+            const text = document.getElementById('comment-text').value.trim();
+
+            if (!name || !text) return;
+
+            const newComment = {
+                name: name,
+                role: role,
+                text: text,
+                date: new Date().toLocaleDateString('id-ID')
+            };
+
+            commentsData.unshift(newComment);
+            renderComments();
+
+            document.getElementById('comment-name').value = '';
+            document.getElementById('comment-role').value = '';
+            document.getElementById('comment-text').value = '';
+        }
+
+        function initTradingView() {
+            if (typeof TradingView !== 'undefined' && document.getElementById('tradingview_ihsg_widget')) {
+                new TradingView.widget({
+                    "autosize": true,
+                    "symbol": "IDX:COMPOSITE",
+                    "interval": "D",
+                    "timezone": "Asia/Jakarta",
+                    "theme": document.documentElement.classList.contains('dark') ? "dark" : "light",
+                    "style": "1",
+                    "locale": "id",
+                    "container_id": "tradingview_ihsg_widget"
+                });
+            }
+
+            const screenerContainer = document.getElementById('tradingview_screener_widget');
+            if (screenerContainer) {
+                screenerContainer.innerHTML = '';
+                const script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js';
+                script.async = true;
+                script.innerHTML = JSON.stringify({
+                    "colorTheme": document.documentElement.classList.contains('dark') ? "dark" : "light",
+                    "dateRange": "12M",
+                    "showChart": false,
+                    "locale": "id",
+                    "width": "100%",
+                    "height": "100%",
+                    "tabs": [
+                        {
+                            "title": "Saham Unggulan IDX",
+                            "symbols": [
+                                { "s": "IDX:BRIS", "d": "Bank Syariah Indonesia" },
+                                { "s": "IDX:TLKM", "d": "Telkom Indonesia" },
+                                { "s": "IDX:BBRI", "d": "Bank Rakyat Indonesia" },
+                                { "s": "IDX:ASII", "d": "Astra International" },
+                                { "s": "IDX:ICBP", "d": "Indofood CBP" },
+                                { "s": "IDX:UNVR", "d": "Unilever Indonesia" }
+                            ]
+                        }
+                    ]
+                });
+                screenerContainer.appendChild(script);
+            }
+        }
+
+        function enterPortfolio() {
+            const intro = document.getElementById('intro-screen');
+            if (intro) {
+                intro.style.opacity = '0';
+                intro.style.pointerEvents = 'none';
+                setTimeout(() => intro.classList.add('hidden'), 700);
+            }
+            toggleMusic(true);
+        }
+
+        // Custom Gold Coin Cursor & Sparkles
+        const cursorFinance = document.getElementById('cursor-finance');
+        const sparkleContainer = document.getElementById('sparkle-container');
+        let lastSparkleTime = 0;
+
+        window.addEventListener('mousemove', function(e) {
+            if (cursorFinance) {
+                cursorFinance.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            }
+
+            const now = Date.now();
+            if (now - lastSparkleTime > 50) {
+                lastSparkleTime = now;
+                const sparkle = document.createElement('div');
+                sparkle.className = 'cursor-sparkle flex items-center justify-center text-amber-300 text-xs font-bold';
+                const icons = ['✨', '🪙', '⭐', '💫'];
+                sparkle.innerText = icons[Math.floor(Math.random() * icons.length)];
+                sparkle.style.left = `${e.clientX}px`;
+                sparkle.style.top = `${e.clientY}px`;
+                if (sparkleContainer) {
+                    sparkleContainer.appendChild(sparkle);
+                    setTimeout(() => sparkle.remove(), 700);
+                }
+            }
+        });
+
+        // Audio Handler Fix & Relaxation Stream
+        let isAudioPlaying = false;
+        function toggleMusic(forcePlay = false) {
+            const audioEl = document.getElementById('bg-music');
+            const musicIcon = document.getElementById('music-icon');
+            const musicIndicator = document.getElementById('music-indicator');
+            if (!audioEl) return;
+
+            if (isAudioPlaying && !forcePlay) {
+                audioEl.pause();
+                if (musicIcon) musicIcon.className = "fa-solid fa-music text-sm";
+                if (musicIndicator) musicIndicator.className = "absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white dark:border-slate-900";
+                isAudioPlaying = false;
+            } else {
+                audioEl.volume = 0.4;
+                const playPromise = audioEl.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        if (musicIcon) musicIcon.className = "fa-solid fa-volume-high text-sm";
+                        if (musicIndicator) musicIndicator.className = "absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white dark:border-slate-900";
+                        isAudioPlaying = true;
+                    }).catch(err => {
+                        console.log("Audio waiting for user gesture:", err);
+                    });
+                }
+            }
+        }
+
+        function openLightbox(src) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            if (modal && img) {
+                img.src = src;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function openGmailModal() {
+            const modal = document.getElementById('gmail-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeGmailModal() {
+            const modal = document.getElementById('gmail-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function sendViaGmailRedirect() {
+            const subject = encodeURIComponent(document.getElementById('gmail-subject').value || "Pesan dari Web Portofolio");
+            const body = encodeURIComponent(document.getElementById('gmail-body').value || "Halo Muhammad Rizki Mustakim, S.E.");
+            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=muhammadrizkimustakim27@gmail.com&su=${subject}&body=${body}`, '_blank');
+            closeGmailModal();
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                if (themeIcon) themeIcon.className = "fa-solid fa-moon text-sm";
+            } else {
+                html.classList.add('dark');
+                if (themeIcon) themeIcon.className = "fa-solid fa-sun text-sm";
+            }
+            initTradingView();
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        window.addEventListener('load', function() {
+            renderComments();
+            initTradingView();
+            typeEffect();
+            initScrollAnimations();
+        });
+    </script>
+</body>
+</html>
